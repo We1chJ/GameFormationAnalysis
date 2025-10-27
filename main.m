@@ -67,13 +67,9 @@ for i = 1:numPlayers
     end
 end
 
-% SHORTEST PATH PROCESSING
-function [] = AStar(adjMatrix, XG)
-    
+adjMatrix = adjMatrix / max(adjMatrix(:)); % Normalize the adjMatrix to get an edge weight of passing success rate
 
-end
-
-AStar(adjMatrix, XG)
-
+% ================= SHORTEST PATH PROCESSING =================
+[path, totalCost] = AStar(adjMatrix(1:11, 1:11), x, y, 7, 10, [x(22), y(22)], MAX_DISTANCE)
 
 
