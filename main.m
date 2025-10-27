@@ -63,13 +63,12 @@ for i = 1:numPlayers
         % Normalize by maximum distance
         normDis = dis / MAX_DISTANCE;
         % Apply passing score effect
-        adjMatrix(i,j) = (passing_score(i) + passing_score(j)) * (1-normDis)^2; % the farther the distance, the less the passing success likelihood
+        adjMatrix(i,j) = (passing_score(i) + passing_score(j)) - (1-normDis)^2; % the farther the distance, the less the passing success likelihood
     end
 end
 
 adjMatrix = adjMatrix / max(adjMatrix(:)); % Normalize the adjMatrix to get an edge weight of passing success rate
 
 % ================= SHORTEST PATH PROCESSING =================
-[path, totalCost] = AStar(adjMatrix(1:11, 1:11), x, y, 7, 10, [x(22), y(22)], MAX_DISTANCE)
-
+[path, failingProb] = AStar(adjMatrix(1:11, 1:11), 1, 11, XG)
 
