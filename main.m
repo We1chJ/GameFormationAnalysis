@@ -72,5 +72,15 @@ adjMatrix = adjMatrix / max(adjMatrix(:)); % Normalize the adjMatrix to get an e
 
 
 % ================= SHORTEST PATH PROCESSING =================
-[path, failingProb] = AStar(adjMatrix(1:11, 1:11), 1, 11, XG)
+numRuns = 100;
+times = zeros(1, numRuns);
+
+for i = 1:numRuns
+    tic;
+    AStar(adjMatrix(1:11, 1:11), 1, 11, XG);
+    times(i) = toc;
+end
+
+fprintf('Average A* time over %d runs: %.6f seconds\n', ...
+        numRuns, mean(times));
 
